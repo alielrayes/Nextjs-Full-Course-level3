@@ -1,0 +1,1 @@
+json-server --watch --port 4000 ./fakeDB/db.json
