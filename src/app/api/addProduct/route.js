@@ -6,8 +6,12 @@ import ProductModal from "app/DBconfig/models/product";
 
 export async function POST(request) {
   // 1- Receive data from Front-end
-  const objFromFrontEnd = await request.json();
+  const objFromFrontEnd = await request.formData();
   console.log(objFromFrontEnd);
+
+const productImg = objFromFrontEnd.get("productImg")
+console.log(productImg)
+
 
   // 2- connect to DB
   await connectMongoDB();
@@ -16,9 +20,9 @@ export async function POST(request) {
  
   // 4- Try to Store obj to DB
   await ProductModal.create({
-    title: objFromFrontEnd.title,
-    price: objFromFrontEnd.price,
-    description: objFromFrontEnd.description
+    title: objFromFrontEnd.get("title"),
+    price: objFromFrontEnd.get("price"),
+    description: objFromFrontEnd.get("description"),
   });
 
   // 5- Go back to frontend

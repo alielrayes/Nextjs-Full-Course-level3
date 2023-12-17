@@ -4,6 +4,9 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 const ProductForm = () => {
+const [img, setImg] = useState(null);
+
+
 
   const [title, setTitle] = useState(null);
   const [price, setPrice] = useState(null);
@@ -14,7 +17,9 @@ const ProductForm = () => {
 
 
   const handleSubmit = async (eo) => {
-    console.log("run FUCTION", title)
+    console.log(img)
+
+
     eo.preventDefault();
     setisLoading(true);
     seterror(null);
@@ -26,16 +31,17 @@ const ProductForm = () => {
     }
 
 
+    const formData = new FormData();
+    formData.set("productImg", img)
+    formData.set("title", title)
+    formData.set("price", price)
+    formData.set("description", description)
 
        // Go to api/addProduct/route.js
    const resAddProduct = await fetch("api/addProduct", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title,price,description
-    }),
+
+    body:  formData,
   });
 
   const data = await resAddProduct.json();
@@ -64,7 +70,7 @@ const ProductForm = () => {
         </label>
         <input
           onChange={(eo) => {
-            // setname(eo.target.value);
+            setImg(eo.target.files[0])
           }}
           required
           type="file"
