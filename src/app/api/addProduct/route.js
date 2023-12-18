@@ -8,32 +8,28 @@ import { uploadStream } from "helper/uploadImgCloudinary";
 export async function POST(request) {
   // 1- Receive data from Front-end
   const objFromFrontEnd = await request.formData();
- 
+  const productImg = objFromFrontEnd.get("productImg");
 
-const productImg = objFromFrontEnd.get("productImg")
+  //2- Convert img into buffer & upload img to cloudinary
+  const bytes = await productImg.arrayBuffer();
+  const buffer = Buffer.from(bytes);
+  const uploadedImg = await uploadStream(buffer);
  
+  const imgURL = uploadedImg.url;
+  console.log(imgURL);
 
-// Convert img into buffer & upload img to cloudinary
-const bytes = await productImg.arrayBuffer();
-const buffer = Buffer.from(bytes);
-const uploadedImg =  await uploadStream(buffer)
-console.log("==================  DONE =================")
-const imgURL = uploadedImg.url
-console.log(imgURL)
-console.log("==================  DONE =================")
 
-  // 2- connect to DB
-  // await connectMongoDB();
+  // 3- connect to DB
+  await connectMongoDB();
 
- 
- 
   // 4- Try to Store obj to DB
-  // await ProductModal.create({
-  //   title: objFromFrontEnd.get("title"),
-  //   price: objFromFrontEnd.get("price"),
-  //   description: objFromFrontEnd.get("description"),
-  // });
-
+  await ProductModal.create({
+    productImg: imgURL,
+    title: objFromFrontEnd.get("title"),
+    price: objFromFrontEnd.get("price"),
+    description: objFromFrontEnd.get("description"),
+  });
+  console.log("==================  DONE =================");
   // 5- Go back to frontend
-  return NextResponse.json(  {message: "product added successfully"}   );
+  return NextResponse.json({ message: "product added successfully" });
 }
