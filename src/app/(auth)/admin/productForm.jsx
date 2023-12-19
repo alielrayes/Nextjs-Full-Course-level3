@@ -100,6 +100,7 @@ const [img, setImg] = useState(null);
           Product Price:
         </label>
         <input
+        step={0.01}
           placeholder="$99.99"
           required
           onChange={(eo) => {

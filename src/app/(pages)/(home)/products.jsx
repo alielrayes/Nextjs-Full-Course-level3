@@ -6,38 +6,14 @@ import { notFound } from "next/navigation";
 import Image from "next/image.js";
 import { useEffect, useState } from "react";
 
-// const arr = [
-//   { productImg: "./images/1.png" },
-//   { productImg: "./images/2.webp" },
-//   { productImg: "./images/3.webp" },
-//   { productImg: "./images/4.webp" },
-//   { productImg: "./images/5.webp" },
-//   { productImg: "./images/6.webp" },
-//   { productImg: "./images/7.webp" },
-//   { productImg: "./images/8.png" },
-// ];
-
-// async function getData() {
-//   // await new Promise(resolve => setTimeout(resolve, 3000))
-
-//   const res = await fetch("http://localhost:4000/products", {
-//     next: { revalidate: 0 },
-//   });
-
-//   if (!res.ok) {
-//     // This will activate the closest `error.js` Error Boundary
-//     notFound();
-//   }
-
-//   return res.json();
-// }
+ 
 
 const Products = () => {
   const [arrData, setstate] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch("http://localhost:4000/products");
+      const res = await fetch("http://localhost:3000/api/getProducts");
 
       if (!res.ok) {
         notFound();
@@ -52,10 +28,15 @@ const Products = () => {
 
   return (
     <section className="products flex">
+
+      {arrData.length == 0 && <p>No products Found!</p>}
+
+
+
       {arrData.map((item) => {
         return (
-          <article title={item.title} key={item.id} className="card">
-            <Link href={`/product-details/${item.id}`}>
+          <article title={item.title} key={item._id} className="card">
+            <Link href={`/product-details/${item._id}`}>
               <Image
                 quality={100}
                 width={266}
