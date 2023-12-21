@@ -70,8 +70,26 @@
   }
 }
 
+.update-product {
+  background-color: var(--blue-button);
+  color: var(--white);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 0.9rem;
+  gap: 0.33rem;
+}
+
+.delete-product {
+  background-color: var(--red-button);
+  color: var(--white);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 0.9rem;
+  gap: 0.33rem;
+}
+
 @media (width < 800px) {
-.product-details  main.flex {
+  .product-details main.flex {
     flex-wrap: wrap;
 
     & img {

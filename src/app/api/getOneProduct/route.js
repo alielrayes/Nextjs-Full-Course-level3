@@ -15,8 +15,7 @@ export async function GET(request) {
   const objData = await ProductModal.findOne({
     _id: id
   });
-  console.log("***********************************************")
-  console.log(objData);
+
 
 
     // 5- Go back to frontend
