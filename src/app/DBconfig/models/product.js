@@ -7,7 +7,9 @@ const mongoose = require("mongoose");
    title: String,
    price: Number,
    description: String,
+   
    productImg: String,
+   imgPublicId: String
  });
 
  // Create a model based on that schema

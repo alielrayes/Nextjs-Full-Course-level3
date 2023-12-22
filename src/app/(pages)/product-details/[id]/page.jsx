@@ -63,7 +63,7 @@ const Page = async ({ params }) => {
           </div>
         </main>
 
-        <AdminBtn productId={params.id} />
+        <AdminBtn productId={params.id} imgPublicId={objData.imgPublicId} />
       </div>
       <Footer />
     </div>
