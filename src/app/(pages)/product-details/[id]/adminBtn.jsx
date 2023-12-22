@@ -7,6 +7,10 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 
 const AdminBtn = ({ productId, imgPublicId }) => {
+
+
+
+
   const [isLoading, setisLoading] = useState(false);
   const [error, seterror] = useState(null);
 
@@ -43,7 +47,7 @@ const AdminBtn = ({ productId, imgPublicId }) => {
       style={{ justifyContent: "center", gap: "2rem", marginTop: "3rem" }}
       className="flex"
     >
-      <Link href={"/update-product"} className="flex update-product">
+      <Link href={`/update-product/${productId}`} className="flex update-product">
         <FontAwesomeIcon style={{ width: "1.1rem" }} icon={faPen} />
         Update Product
       </Link>

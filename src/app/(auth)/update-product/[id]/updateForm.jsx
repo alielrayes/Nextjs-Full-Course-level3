@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import { notFound } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
-const UpdateForm = () => {
+const UpdateForm = ({ productId }) => {
   const [title, setTitle] = useState(null);
   const [price, setPrice] = useState(null);
   const [description, setDescription] = useState(null);
@@ -9,7 +10,39 @@ const UpdateForm = () => {
   const [isLoading, setisLoading] = useState(false);
   const [error, seterror] = useState(null);
 
-  const handleSubmit = (params) => {};
+  const handleSubmit = (params) => {
+
+
+
+
+
+
+
+
+
+    
+  };
+
+  const [data, setData] = useState(null);
+  console.log(data);
+
+  useEffect(() => {
+    const getData = async (productId) => {
+      const res = await fetch(
+        `http://localhost:3000/api/getOneProduct?id=${productId}`
+      );
+      if (!res.ok) {
+        notFound();
+      }
+      const data = await res.json();
+      setData(data);
+    };
+    getData(productId);
+  }, [productId]);
+
+  if (!data) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <form onSubmit={handleSubmit} style={{ textAlign: "left" }}>
@@ -18,7 +51,7 @@ const UpdateForm = () => {
           Product Title:
         </label>
         <input
-   
+          defaultValue={data.title}
           required
           onChange={(eo) => {
             setTitle(eo.target.value);
@@ -35,6 +68,7 @@ const UpdateForm = () => {
           Product Price:
         </label>
         <input
+          defaultValue={data.price}
           step={0.01}
           placeholder="$99.99"
           required
@@ -53,6 +87,7 @@ const UpdateForm = () => {
         </label>
 
         <textarea
+          defaultValue={data.description}
           placeholder="Product Description....."
           required
           onChange={(eo) => {

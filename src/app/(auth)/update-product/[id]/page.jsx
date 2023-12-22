@@ -2,12 +2,12 @@ import Header from 'components/header/header';
 import React from 'react';
 import UpdateForm from './updateForm';
 
-const Page = () => {
+const Page = ({params}) => {
   return (
     <>
       <Header isAdminPage={false} />
       <main className="px-3">
-      <UpdateForm />
+      <UpdateForm productId={params.id} />
       </main>
     </>
   );
