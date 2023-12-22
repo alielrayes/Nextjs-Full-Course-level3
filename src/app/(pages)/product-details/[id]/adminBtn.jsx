@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 const AdminBtn = ({ productId, imgPublicId }) => {
   const [isLoading, setisLoading] = useState(false);
@@ -42,10 +43,10 @@ const AdminBtn = ({ productId, imgPublicId }) => {
       style={{ justifyContent: "center", gap: "2rem", marginTop: "3rem" }}
       className="flex"
     >
-      <button className="flex update-product">
+      <Link href={"/update-product"} className="flex update-product">
         <FontAwesomeIcon style={{ width: "1.1rem" }} icon={faPen} />
         Update Product
-      </button>
+      </Link>
 
       <button onClick={handleDelete} className="flex delete-product">
         <FontAwesomeIcon style={{ width: "1.1rem" }} icon={faTrash} />
